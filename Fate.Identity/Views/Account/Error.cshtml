@@ -1,0 +1,21 @@
+﻿@using IdentityServer4.Models;
+@{
+    Layout = null;
+}
+@model ErrorMessage
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Error</title>
+</head>
+<body>
+    @if (Model != null)
+    {
+        <div>@Model.Error</div>
+        <div>@Model.ErrorDescription</div>
+        <div>@Model.RequestId</div>
+        <div>@Model.RedirectUri</div>
+    }
+</body>
+</html>

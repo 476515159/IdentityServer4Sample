@@ -1,0 +1,234 @@
+﻿{
+  /*
+  DownstreamPathTemplate：下游戏
+DownstreamScheme：下游服务http schema
+DownstreamHostAndPorts：下游服务的地址，如果使用LoadBalancer的话这里可以填多项
+UpstreamPathTemplate: 上游也就是用户输入的请求Url模板
+UpstreamHttpMethod: 上游请求http方法，可使用数组
+  */
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/api/User/Get",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8001
+        }
+      ],
+      "UpstreamPathTemplate": "/User",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Fatehuli",
+        "AllowedScopes": [ "Fate_UserAPI" ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/GetBaseInfo/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8001
+        }
+      ],
+      "UpstreamPathTemplate": "/User/GetBaseInfo/{userId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Fatehuli",
+        "AllowedScopes": [ "Fate_UserAPI" ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/Update_User",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8001
+        }
+      ],
+      "UpstreamPathTemplate": "/User/Update_User",
+      "UpstreamHttpMethod": [ "Patch" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Fatehuli",
+        "AllowedScopes": [ "Fate_UserAPI" ]
+      }
+    },
+    //----------------------------Project API分割线-----------------------------------------------
+    {
+      "DownstreamPathTemplate": "/api/project",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8005
+        }
+      ],
+      "UpstreamPathTemplate": "/project",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Fatehuli",
+        "AllowedScopes": [ "Fate_ProjectAPI" ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/project/my/{projectId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8005
+        }
+      ],
+      "UpstreamPathTemplate": "/project/my/{projectId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Fatehuli",
+        "AllowedScopes": [ "Fate_ProjectAPI" ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/project/add_project",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8005
+        }
+      ],
+      "UpstreamPathTemplate": "/project/add_project",
+      "UpstreamHttpMethod": [ "Post" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Fatehuli",
+        "AllowedScopes": [ "Fate_ProjectAPI" ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/project/add_projectjoiner",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8005
+        }
+      ],
+      "UpstreamPathTemplate": "/project/add_projectjoiner",
+      "UpstreamHttpMethod": [ "Post" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Fatehuli",
+        "AllowedScopes": [ "Fate_ProjectAPI" ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/project/add_projectviewer/{projectid}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8005
+        }
+      ],
+      "UpstreamPathTemplate": "/project/add_projectviewer/{projectid}",
+      "UpstreamHttpMethod": [ "Post" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Fatehuli",
+        "AllowedScopes": [ "Fate_ProjectAPI" ]
+      }
+    },
+    //----------------------------授权分割线-----------------------------------------------
+    {
+      "DownstreamPathTemplate": "/connect/{catchAll}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8009
+        }
+      ],
+      "UpstreamPathTemplate": "/connect/{catchAll}",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/.well-known/{catchAll}", //万能模版,全部转发
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8009
+        }
+      ],
+      "UpstreamPathTemplate": "/.well-known/{catchAll}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    //----------------------------Contact API分割线-----------------------------------------------
+    {
+      "DownstreamPathTemplate": "/api/contact",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8003
+        }
+      ],
+      "UpstreamPathTemplate": "/contact",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Fatehuli",
+        "AllowedScopes": [ "Fate_ContactAPI" ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/contact/apply-request",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8003
+        }
+      ],
+      "UpstreamPathTemplate": "/contact/apply-request",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Fatehuli",
+        "AllowedScopes": [ "Fate_ContactAPI" ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/contact/apply-request/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8003
+        }
+      ],
+      "UpstreamPathTemplate": "/contact/apply-request/{userId}",
+      "UpstreamHttpMethod": [ "Post" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Fatehuli",
+        "AllowedScopes": [ "Fate_ContactAPI" ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/contact/apply-request/{ApplierId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8003
+        }
+      ],
+      "UpstreamPathTemplate": "/contact/apply-request/{ApplierId}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Fatehuli",
+        "AllowedScopes": [ "Fate_ContactAPI" ]
+      }
+    }
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost"
+  }
+}

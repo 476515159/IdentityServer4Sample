@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+<h2>hello word</h2>
+<h3>this is /helloword/Index</h3>
+<script>
+    function logout() {
+        if (confirm("确认退出?")) {
+            document.querySelector("#form").submit();
+        }
+    }
+</script>
+<div>
+    <form id="form" asp-action="Logout" asp-controller="HelloWorld" method="post">
+        @*<input type="hidden" name="logoutId" value="@Model." />*@
+        <fieldset>
+            <div class="form-group">
+                <button class="btn btn-primary" type="button" onclick="logout()">退出</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+@foreach (var item in User.Claims)
+{
+    <div>@item.Type:@item.Value</div>
+}

@@ -1,0 +1,38 @@
+﻿@using Fate.Identity.ViewModels;
+@model LogoutViewModel
+@{
+    Layout = null;
+}
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Logout</title>
+</head>
+<body>
+    <div class="logout-page">
+        <div class="page-header">
+            <h1>退出</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <p>
+                    你确定要退出登录吗？
+                </p>
+                <form asp-action="Logout" method="post">
+                    <input type="hidden" name="logoutId" value="@Model.logoutId" />
+                    <input type="hidden" asp-for="ShowSignoutPrompt" />
+                    <fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-primary">确定</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

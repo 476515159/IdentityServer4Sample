@@ -1,0 +1,35 @@
+﻿@using Fate.Identity.ViewModels;
+@model LogoutViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta http-equiv='Page-Enter' content='progid:DXImageTransform.Microsoft.Pixelate(Duration=2)' />
+    <meta http-equiv='Page-Exit' content='progid:DXImageTransform.Microsoft.Pixelate(Duration=2)' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title></title>
+    <link href='/css/loginloading.css' rel='stylesheet'>
+</head>
+<body>
+    <div class='sk-three-bounce'>
+        <div class='sk-child sk-bounce1'></div>
+        <div class='sk-child sk-bounce2'></div>
+        <div class='sk-child sk-bounce3'></div>
+    </div>
+    <iframe style="display:none;" frameborder="0" width="0" height="0" src="@Model.SignOutIframeUrl"></iframe>
+    <a class="PostLogoutRedirectUri" href="@Model.RedirectUri"></a>
+    <script>
+        window.addEventListener("load", function () {
+            var a = document.querySelector("a.PostLogoutRedirectUri");
+            if (a) {
+                window.location = a.href;
+            }
+        });
+
+    </script>
+</body>
+</html>

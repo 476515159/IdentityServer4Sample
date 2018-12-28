@@ -1,0 +1,22 @@
+﻿@using Fate.Identity.ViewModels;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+<form asp-action="Login" method="post">
+    <img src="@Model.ClientLogoUrl"  width="200" height="100"/>
+    <div>
+        <input type="text" lay-verify="required" class="user_name" asp-for="UserName" placeholder=" 用 户 名"  value="13136056078"/><br />
+
+        <input type="password" lay-verify="required" class="user_pwd" asp-for="Password" placeholder=" 密 码"  value="123456"/>
+        <input type="hidden" asp-for="ReturnUrl" />
+        <input type="checkbox" asp-for="RememberLogin" />
+        <button type="submit" class="submit">立 即 登 录</button>
+
+        <div asp-validation-summary="All" style="color:red"> </div>
+    </div>
+    
+</form>

@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNetCore.Authentication;
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+<h3>this is /Home/Index</h3>
+<script>
+    function logout() {
+        if (confirm("确认退出?")) {
+            document.querySelector("#form").submit();
+        } 
+    }
+</script>
+<div>
+    <form id="form" asp-action="Logout" asp-controller="Account" method="post">
+        @*<input type="hidden" name="logoutId" value="@Model." />*@
+        <fieldset>
+            <div class="form-group">
+                <button class="btn btn-primary"  type="button" onclick="logout()">退出</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+@foreach (var item in User.Claims)
+{
+    <div>@item.Type:@item.Value</div>
+}
+<dt>access token:</dt>
+<dd>@await ViewContext.HttpContext.GetTokenAsync("access_token")</dd>
+
+<dt>refresh token:</dt>
+<dd>@await ViewContext.HttpContext.GetTokenAsync("refresh_token")</dd>
+
+<dt>ID token:</dt>
+<dd>@await ViewContext.HttpContext.GetTokenAsync("id_token")</dd>
+

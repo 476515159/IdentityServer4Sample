@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Fate.API</name>
+    </assembly>
+    <members>
+        <member name="M:Fate.API.Controllers.UserController.GetUserTags">
+            <summary>
+            获取用户标签
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fate.API.Controllers.UserController.Update_UserTags(System.Collections.Generic.List{System.String})">
+            <summary>
+            更新用户标签
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fate.API.Controllers.UserController.Serch(System.String)">
+            <summary>
+            搜索用户
+            </summary>
+            <param name="phone"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fate.API.Extensions.DbcontextExtensions.CheckMigrations(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            检查是否需要迁移
+            </summary>
+            <param name="app"></param>
+        </member>
+    </members>
+</doc>
