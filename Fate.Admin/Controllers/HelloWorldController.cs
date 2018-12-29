@@ -20,6 +20,7 @@ namespace Fate.Admin.Controllers
 
         public IActionResult Index()
         {
+            var context = HttpContext.User.Identity.Name;
             var app = AppSetting;
             return View();
         }

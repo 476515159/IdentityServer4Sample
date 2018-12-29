@@ -12,7 +12,8 @@ namespace Fate.Identity.Services
         public Task GetProfileDataAsync(ProfileDataRequestContext context)
         {
             var subject = context.Subject ?? throw new ArgumentNullException(nameof(context.Subject));
-            context.IssuedClaims = subject.Claims.ToList();
+            //context.IssuedClaims = subject.Claims.ToList();
+            context.AddRequestedClaims(subject.Claims.ToList());
             return Task.CompletedTask;
         }
 

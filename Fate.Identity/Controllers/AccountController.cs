@@ -111,7 +111,6 @@ namespace Fate.Identity.Controllers
             };
             await HttpContext.SignInAsync(userInfo.ID.ToString(), userInfo.UserName, authenticationProperties
                 , claims);
-
             if (_identityServerInteractionService.IsValidReturnUrl(model.ReturnUrl) || Url.IsLocalUrl(model.ReturnUrl))
             {
                 return Redirect(model.ReturnUrl);
