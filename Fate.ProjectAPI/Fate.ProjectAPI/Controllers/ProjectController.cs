@@ -22,6 +22,7 @@ namespace Fate.ProjectAPI.Controllers
         private readonly IMediator _mediator;
         private readonly IRecommendService _recommendService;
         private readonly IProjectQueries _projectQueries;
+        
 
         public ProjectController(IMediator mediator, IRecommendService recommendService, IProjectQueries projectQueries)
         {

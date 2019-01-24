@@ -10,7 +10,7 @@
     function logout() {
         if (confirm("确认退出?")) {
             document.querySelector("#form").submit();
-        } 
+        }
     }
 </script>
 <div>
@@ -18,7 +18,7 @@
         @*<input type="hidden" name="logoutId" value="@Model." />*@
         <fieldset>
             <div class="form-group">
-                <button class="btn btn-primary"  type="button" onclick="logout()">退出</button>
+                <button class="btn btn-primary" type="button" onclick="logout()">退出</button>
             </div>
         </fieldset>
     </form>
@@ -28,6 +28,8 @@
 {
     <div>@item.Type:@item.Value</div>
 }
+<dt>UserName:</dt>
+<dd>@User.Identity.Name</dd>
 <dt>access token:</dt>
 <dd>@await ViewContext.HttpContext.GetTokenAsync("access_token")</dd>
 

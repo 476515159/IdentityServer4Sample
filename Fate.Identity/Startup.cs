@@ -12,6 +12,7 @@ using Fate.Identity.Infrastructure;
 using Fate.Identity.InitData;
 using Fate.Identity.Services;
 using IdentityServer4.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -112,6 +113,22 @@ namespace Fate.Identity
              .AddProfileService<ProfileService>();
             #endregion
 
+
+            #region 授权配置
+            //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = "oidc";
+            })
+            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+            {
+
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+                options.Cookie.Name = CookieAuthenticationDefaults.AuthenticationScheme;//监控浏览器Cookies不难发现有这样一个 .AspNetCore.Cookies 记录了加密的授权信息 
+
+            });
+            #endregion
 
             #region 服务注册
 

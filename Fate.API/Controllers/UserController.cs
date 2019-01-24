@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using DotNetCore.CAP;
 using Models.Dtos.Identity;
 using Microsoft.AspNetCore.Authorization;
+using System.Net;
 
 namespace Fate.API.Controllers
 {
@@ -23,7 +24,7 @@ namespace Fate.API.Controllers
         private readonly AppSetting appSetting;
         private readonly EntityDbContext _db;
         private readonly ICapPublisher _capPublisher;
-        public UserController(EntityDbContext db, IOptionsMonitor<AppSetting> options, ICapPublisher capPublisher)
+        public UserController([FromServices]EntityDbContext db, IOptionsMonitor<AppSetting> options, ICapPublisher capPublisher)
         {
             _db = db;
             appSetting = options.CurrentValue;
@@ -71,6 +72,8 @@ namespace Fate.API.Controllers
         #endregion
 
         [HttpGet("Get")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Get()
         {
 

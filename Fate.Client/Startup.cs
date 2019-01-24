@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 using Fate.Client.HttpClientApi;
+using Fate.Client.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -55,7 +58,7 @@ namespace Fate.Client
                 {
                     options.SignInScheme = "Cookies";
                     options.Authority = "http://localhost:8009";
-                    options.ClientId = "testclient";
+                    options.ClientId = "testclient2";
                     options.ClientSecret = "secret";
                     options.Scope.Add("Fate_Admin");
                     options.ResponseType = OpenIdConnectResponseType.IdTokenToken;//服务端为简单模式不能有code,混合模式就选择有code的（CodeIdToken）
@@ -74,6 +77,27 @@ namespace Fate.Client
             });
             services.AddSingleton(typeof(HttpClientService));
             #endregion
+
+            #region Redis注册
+            //-----------------微软的
+            services.AddDistributedRedisCache(options =>
+            {
+                Configuration.GetSection("RedisCache").Bind(options);
+                ////用于连接Redis的配置  
+                //options.Configuration = Configuration["RedisCache:RedisConnectionString"];
+                ////Redis实例名
+                //options.InstanceName = Configuration["RedisCache:InstanceName"];
+            });
+
+
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = "Fate.Session";
+                options.IdleTimeout = TimeSpan.FromSeconds(10);//设置session的过期时间
+                options.Cookie.HttpOnly = true;//设置在浏览器不能通过js获得该cookie的值
+            }
+            );
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -90,7 +114,7 @@ namespace Fate.Client
             app.UseAuthentication();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

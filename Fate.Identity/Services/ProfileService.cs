@@ -3,6 +3,7 @@ using IdentityServer4.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Fate.Identity.Services
@@ -13,7 +14,10 @@ namespace Fate.Identity.Services
         {
             var subject = context.Subject ?? throw new ArgumentNullException(nameof(context.Subject));
             //context.IssuedClaims = subject.Claims.ToList();
-            context.AddRequestedClaims(subject.Claims.ToList());
+            var claims = subject.Claims.ToList();
+            claims.Add(new Claim(ClaimTypes.Name,claims.FirstOrDefault(c=>c.Type=="name")?.Value));
+            context.IssuedClaims = claims;
+            context.AddRequestedClaims(claims);
             return Task.CompletedTask;
         }
 

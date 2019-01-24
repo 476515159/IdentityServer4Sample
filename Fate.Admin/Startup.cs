@@ -51,7 +51,6 @@ namespace Fate.Admin
                 options.DefaultChallengeScheme = "oidc";
             })
             .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options => {
-
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
                 options.Cookie.Name = CookieAuthenticationDefaults.AuthenticationScheme;//监控浏览器Cookies不难发现有这样一个 .AspNetCore.Cookies 记录了加密的授权信息 
             })
@@ -59,7 +58,7 @@ namespace Fate.Admin
                  {
                      options.SignInScheme = "Cookies";//用于在OpenID Connect协议完成后使用cookie处理程序发出cookie
                      options.Authority = "http://localhost:8009";
-                     options.ClientId = "testadmin";
+                     options.ClientId = "testadmin2";
                      options.ClientSecret = "secret";
                      options.Scope.Add("Fate_Admin");
                      options.ResponseType = OpenIdConnectResponseType.IdTokenToken;////服务端为简单模式不能有code,混合模式就选择有code的（CodeIdToken）
@@ -75,7 +74,6 @@ namespace Fate.Admin
             #region 服务注册
             services.ConfigServies();
             #endregion
-
             //services.AddSQLSugarClient
         }
 

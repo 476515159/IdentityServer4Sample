@@ -159,7 +159,7 @@ namespace Fate.Identity.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout(LogoutViewModel viewModel)
         {
             var context = await _identityServerInteractionService.GetLogoutContextAsync(viewModel.logoutId);

@@ -25,6 +25,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Models;
 using Resilience;
+using MongoDB.Driver;
 
 namespace Fate.ContactAPI
 {

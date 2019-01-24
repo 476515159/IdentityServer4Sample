@@ -25,6 +25,7 @@ using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Http.Features;
 using Fate.ProjectAPI.Applications.Queries;
 using Fate.ProjectAPI.Applications.Services;
+using Fate.Project.Infrastructure.RedisCache;
 
 namespace Fate.ProjectAPI
 {
@@ -138,6 +139,11 @@ namespace Fate.ProjectAPI
             });
             #endregion
 
+            #region CsRedis注册
+            services.Configure<CsRedisOptions>(Configuration.GetSection("CsRedis"));
+            services.AddSingleton<CsRedisHelper>();
+            #endregion
+
             #region DI注入
             services.AddMediatR();//同一个程序集不用加参数
             //services.AddMediatR(typeof(Fate.Project.Domain.AggregatesModel.Project).GetType().Assembly);
@@ -165,25 +171,25 @@ namespace Fate.ProjectAPI
                 app.UseHsts();
             }
             loggerFactory.AddDebug();
-
             #region Consul 注册与停止
             //启动时注册服务
-            applicationLifetime.ApplicationStarted.Register(() =>
-            {
-                RegisterService(app, serviceOptions, consul, applicationLifetime);
-            });
+            //applicationLifetime.ApplicationStarted.Register(() =>
+            //{
+            //    RegisterService(app, serviceOptions, consul, applicationLifetime);
+            //});
 
-            //停止时销毁服务
-            applicationLifetime.ApplicationStopping.Register(() =>
-            {
-                DeRegisterService(app, serviceOptions, consul);
-            });
+            ////停止时销毁服务
+            //applicationLifetime.ApplicationStopping.Register(() =>
+            //{
+            //    DeRegisterService(app, serviceOptions, consul);
+            //});
 
             #endregion
             app.UseAuthentication();
             app.UseCap();
             app.UseStaticFiles();
             app.UseHttpsRedirection();
+            
             app.UseMvc();
         }
 
